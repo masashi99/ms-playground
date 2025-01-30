@@ -2,7 +2,7 @@ type Props = {
   message: string;
 };
 
-export async function MainPagePresentation(props: Props) {
+export function MainPagePresentation(props: Props) {
   return (
     <div>
       <p>{props.message}</p>
