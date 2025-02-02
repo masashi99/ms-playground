@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-playground-backend-service
+spec:
+  selector:
+    app: ms-playground-api
+  ports:
+    - name: api
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-playground-backend-deployment
+  labels:
+    app: ms-playground-backend
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-playground-api
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: ms-playground-api
+        version: v1
+    spec:
+      containers:
+        - name: ms-playground-api-container
+          image: backend:0.2
+          ports:
+            - containerPort: 8080
