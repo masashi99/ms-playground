@@ -34,6 +34,6 @@ spec:
     spec:
       containers:
         - name: ms-playground-front-container
-          image: front:0.1
+          image: frontend:0.2
           ports:
             - containerPort: 3000

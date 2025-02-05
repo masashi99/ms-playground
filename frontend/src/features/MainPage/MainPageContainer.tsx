@@ -1,23 +1,10 @@
-"use client";
-import { useEffect, useState } from "react";
 import { MainPagePresentation } from "./MainPagePresentation";
 
-export function MainPageContainer() {
-  const [data, setData] = useState<any>();
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetcher = async () => {
-      try {
-        const res = await fetch("http://localhost:8080/api/ping");
-        const data = await res.json();
-        setData(data);
-        setLoading(false);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    fetcher();
-  }, []);
-  if (loading) return null;
+export async function MainPageContainer() {
+  const res = await fetch("http://ms-playground-backend-service:8080/api/ping");
+  console.log(res);
+  if (!res.ok) return null;
+  const data = await res.json();
+
   return <MainPagePresentation message={data?.message || ""} />;
 }
